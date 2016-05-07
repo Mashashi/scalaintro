@@ -1,4 +1,4 @@
-package de
+package week2
 
 class Rational(x: Int, y: Int) {
 	
@@ -44,33 +44,3 @@ class Rational(x: Int, y: Int) {
 	
 	override def toString = numer + "/" + denom
 }
-
-object s3functionsanddata {
-
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
-  new Rational(1,2).denom                         //> res0: Int = 2
-  val x = new Rational(1,3)                       //> x  : de.Rational = 1/3
-  val y = new Rational(5,7)                       //> y  : de.Rational = 5/7
-  val z = new Rational(3,2)                       //> z  : de.Rational = 3/2
-  
-  x - y - z                                       //> res1: de.Rational = -79/42
-  new Rational(2)                                 //> res2: de.Rational = 2/1
-}
-
-
-/*
-The precedence of an operator is determined by its first character.
-Following the next table order of Precedence Rules:
-	<lowest>
-	(all letters)
-	|
-	^
-	&
-	<>
-	=!
-	:
-	+ -
-	* / %
-	(all other special characters)
-	<highest>
-*/
