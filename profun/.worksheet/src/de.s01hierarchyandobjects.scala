@@ -4,68 +4,12 @@ object s01hierarchyandobjects {;import org.scalaide.worksheet.runtime.library.Wo
   println("Welcome to the Scala worksheet");$skip(95); 
   
   //val t1 = new NonEmpty(3, new Empty, new Empty)
-  val a1 = new NonEmpty(3, Empty, Empty);System.out.println("""a1  : de.NonEmpty = """ + $show(a1 ));$skip(21); 
-  val a2 = a1 incl 4;System.out.println("""a2  : de.IntSet = """ + $show(a2 ));$skip(44); 
+  val a1 = new NonEmpty(3, Empty, Empty);System.out.println("""a1  : <error> = """ + $show(a1 ));$skip(21); 
+  val a2 = a1 incl 4;System.out.println("""a2  : <error> = """ + $show(a2 ));$skip(44); 
   
-  val b1 = new NonEmpty(2, Empty, Empty);System.out.println("""b1  : de.NonEmpty = """ + $show(b1 ));$skip(21); 
-  val b2 = b1 incl 5;System.out.println("""b2  : de.IntSet = """ + $show(b2 ));$skip(21); 
-  val b3 = b2 incl 1;System.out.println("""b3  : de.IntSet = """ + $show(b3 ));$skip(17); val res$0 = 
+  val b1 = new NonEmpty(2, Empty, Empty);System.out.println("""b1  : <error> = """ + $show(b1 ));$skip(21); 
+  val b2 = b1 incl 5;System.out.println("""b2  : <error> = """ + $show(b2 ));$skip(21); 
+  val b3 = b2 incl 1;System.out.println("""b3  : <error> = """ + $show(b3 ));$skip(17); val res$0 = 
   
-  a2 union b3;System.out.println("""res0: de.IntSet = """ + $show(res$0))}
-}
-
-
-abstract class IntSet {
-	def incl(x: Int): IntSet
-	def contains(x: Int): Boolean
-	def union(other: IntSet): IntSet
-}
-
-/*
-class Empty extends IntSet {
-	def contains(x: Int): Boolean = false
-	def incl(x: Int): IntSet = new NonEmpty(x, new Empty, new Empty)
-	override def toString = "."
-}
-*/
-
-// We just need a single obj to represent Empty
-// Its overkill to have several instances
-// No other instances of Empty can be (or need to be created)
-// Singletion objects are values, so Empty evaluates to itself
-object Empty extends IntSet {
-	def contains(x: Int): Boolean = false
-	def incl(x: Int): IntSet = new NonEmpty(x, Empty, Empty)
-	def union(other: IntSet) : IntSet ={
-		//println(this+" u "+other +" = "+other)
-		other
-	}
-	override def toString = "."
-}
-
-class NonEmpty(elem: Int, left: IntSet, right: IntSet) extends IntSet {
-	def contains(x: Int): Boolean =
-		if (x < elem) left contains x
-		else if (x > elem) right contains x
-		else true
-		
-	def incl(x: Int): IntSet ={
-		//println("(" + this + " i "+elem)
-		if (x < elem)
-			new NonEmpty(elem, left incl x, right)
-		else if (x > elem)
-			new NonEmpty(elem, left, right incl x)
-		else this
-	}
-	// The solution for this is not trivial
-	// The idea is to reduce the build of the union tree to a set of incl calls
-	// Note that the recursive call is the outermost one
-	def union(other: IntSet) : IntSet ={
-		//println("(" + this +" u "+ other +")")
-		//println("((" + left+" u "+ right +") u "+other+") i "+elem)
-		((left union right) union other) incl elem
-	}
-	
-	override def toString = "{" + left + elem + right + "}"
-
+  a2 union b3;System.out.println("""res0: <error> = """ + $show(res$0))}
 }
